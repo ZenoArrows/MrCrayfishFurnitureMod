@@ -484,6 +484,8 @@
     "block.cfm.green_photo_frame": "Зелёная фоторамка",
     "block.cfm.red_photo_frame": "Красная фоторамка",
     "block.cfm.black_photo_frame": "Чёрная фоторамка",
+    "block.cfm.tv": "Телевизор",
+    "block.cfm.modern_tv": "Современный телевизор",
     "item.cfm.spatula": "Лопатка",
     "container.cfm.cabinet": "Шкафчик",
     "container.cfm.bedside_cabinet": "Тумбочка",
@@ -524,5 +526,9 @@
     "message.cfm.photo_frame.success": "Изображение загружено успешно",
     "message.cfm.photo_frame.failed": "Не удалось загрузить файл",
     "message.cfm.photo_frame.unknown_file": "URL не является изображением",
-    "message.cfm.photo_frame.too_large": "Изображения больше 2 мегабайт недоступны для загрузки"
+    "message.cfm.photo_frame.too_large": "Изображения больше 2 мегабайт недоступны для загрузки",
+    "message.cfm.video.success": "MP4-файл загружен успешно",
+    "message.cfm.video.failed": "Не удалось загрузить файл",
+    "message.cfm.video.unknown_file": "URL не является MP4-файлом",
+    "message.cfm.video.too_large": "MP4-файлы больше 2 мегабайт недоступны для загрузки"
 }

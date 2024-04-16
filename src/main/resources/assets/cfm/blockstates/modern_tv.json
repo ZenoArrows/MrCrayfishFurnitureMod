@@ -1,0 +1,36 @@
+{
+    "variants": {
+        "facing=north,mounted=true": {
+            "model": "cfm:block/modern_tv_wall",
+            "y": 0
+        },
+        "facing=north,mounted=false": {
+            "model": "cfm:block/modern_tv",
+            "y": 0
+        },
+        "facing=east,mounted=true": {
+            "model": "cfm:block/modern_tv_wall",
+            "y": 90
+        },
+        "facing=east,mounted=false": {
+            "model": "cfm:block/modern_tv",
+            "y": 90
+        },
+        "facing=south,mounted=true": {
+            "model": "cfm:block/modern_tv_wall",
+            "y": 180
+        },
+        "facing=south,mounted=false": {
+            "model": "cfm:block/modern_tv",
+            "y": 180
+        },
+        "facing=west,mounted=true": {
+            "model": "cfm:block/modern_tv_wall",
+            "y": 270
+        },
+        "facing=west,mounted=false": {
+            "model": "cfm:block/modern_tv",
+            "y": 270
+        }
+    }
+}

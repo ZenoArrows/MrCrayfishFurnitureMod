@@ -484,6 +484,8 @@
     "block.cfm.green_photo_frame": "Porta-Retrato Verde",
     "block.cfm.red_photo_frame": "Porta-Retrato Vermelho",
     "block.cfm.black_photo_frame": "Porta-Retrato Preto",
+    "block.cfm.tv": "TV",
+    "block.cfm.modern_tv": "TV Moderna",
     "item.cfm.spatula": "Espátula",
     "container.cfm.cabinet": "Armário",
     "container.cfm.bedside_cabinet": "Criado-Mudo",
@@ -524,5 +526,9 @@
     "message.cfm.photo_frame.success": "A imagem foi transferida com sucesso",
     "message.cfm.photo_frame.failed": "Falha ao baixar o arquivo",
     "message.cfm.photo_frame.unknown_file": "URL não é uma imagem",
-    "message.cfm.photo_frame.too_large": "Nã é possível carregar imagens maiores que 2MB"
+    "message.cfm.photo_frame.too_large": "Nã é possível carregar imagens maiores que 2MB",
+    "message.cfm.video.success": "O MP4 foi transferido com sucesso",
+    "message.cfm.video.failed": "Falha ao baixar o arquivo",
+    "message.cfm.video.unknown_file": "URL não é um MP4",
+    "message.cfm.video.too_large": "Não é possível carregar MP4s maiores que 2MB"
 }

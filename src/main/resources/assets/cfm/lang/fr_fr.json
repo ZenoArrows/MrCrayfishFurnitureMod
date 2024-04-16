@@ -483,7 +483,9 @@
     "block.cfm.brown_photo_frame": "Cadre Photo Brun",
     "block.cfm.green_photo_frame": "Cadre Photo Vert",
     "block.cfm.red_photo_frame": "Cadre Photo Rouge",
-    "block.cfm.black_photo_frame": "Cadre Photo Noir,
+    "block.cfm.black_photo_frame": "Cadre Photo Noir,,,,
+    "block.cfm.tv": "TV",
+    "block.cfm.modern_tv": "TV Moderne",
     "item.cfm.spatula": "Spatule",
     "container.cfm.cabinet": "Placard",
     "container.cfm.bedside_cabinet": "Table de Nuit",
@@ -524,5 +526,9 @@
     "message.cfm.photo_frame.success": "Image chargée avec succès",
     "message.cfm.photo_frame.failed": "Chargement de l'image échoué",
     "message.cfm.photo_frame.unknown_file": "L'URL ne cible pas une image",
-    "message.cfm.photo_frame.too_large": "Impossible de charger des images de plus de 2 Mb"
+    "message.cfm.photo_frame.too_large": "Impossible de charger des images de plus de 2 Mb",
+    "message.cfm.video.success": "MP4 chargé avec succès",
+    "message.cfm.video.failed": "Chargement du MP4 échoué",
+    "message.cfm.video.unknown_file": "L'URL ne cible pas un MP4",
+    "message.cfm.video.too_large": "Impossible de charger des MP4s de plus de 2 Mb"
 }

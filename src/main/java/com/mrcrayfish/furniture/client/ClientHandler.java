@@ -14,6 +14,7 @@ import com.mrcrayfish.furniture.client.renderer.tileentity.DoorMatBlockEntityRen
 import com.mrcrayfish.furniture.client.renderer.tileentity.GrillBlockEntityRenderer;
 import com.mrcrayfish.furniture.client.renderer.tileentity.KitchenSinkBlockEntityRenderer;
 import com.mrcrayfish.furniture.client.renderer.tileentity.PhotoFrameBlockEntityRenderer;
+import com.mrcrayfish.furniture.client.renderer.tileentity.DisplayBlockEntityRenderer;
 import com.mrcrayfish.furniture.core.ModBlockEntities;
 import com.mrcrayfish.furniture.core.ModBlocks;
 import com.mrcrayfish.furniture.core.ModContainers;
@@ -29,7 +30,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.Level;
@@ -336,6 +336,7 @@ public class ClientHandler
         event.registerBlockEntityRenderer(ModBlockEntities.DOOR_MAT.get(), DoorMatBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_SINK.get(), KitchenSinkBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.PHOTO_FRAME.get(), PhotoFrameBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.DISPLAY.get(), DisplayBlockEntityRenderer::new);
     }
 
     public static void onRegisterGeometryLoaders(ModelEvent.ModifyBakingResult event)

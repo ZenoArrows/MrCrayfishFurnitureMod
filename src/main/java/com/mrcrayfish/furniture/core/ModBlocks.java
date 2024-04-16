@@ -497,6 +497,9 @@ public class ModBlocks
     public static final RegistryObject<Block> PHOTO_FRAME_GREEN = register("green_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.BIRCH_PLANKS)));
     public static final RegistryObject<Block> PHOTO_FRAME_RED = register("red_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.BIRCH_PLANKS)));
     public static final RegistryObject<Block> PHOTO_FRAME_BLACK = register("black_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.BIRCH_PLANKS)));
+    public static final RegistryObject<Block> TV = register("tv", () -> new TVBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> MODERN_TV = register("modern_tv", () -> new ModernTVBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> MONITOR = register("monitor", () -> new MonitorBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
 
     private static RegistryObject<Block> register(String name, Supplier<Block> block)
     {

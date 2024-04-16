@@ -32,7 +32,7 @@ public class DownloadUtils
     {
         String scheme = uri.getScheme();
         // Only allow http or https
-        return scheme != null && (scheme.equals("http") || scheme.equals("https"));
+        return scheme != null && (scheme.equals("http") || scheme.equals("https") || scheme.equals("file") || scheme.equals("minecraft"));
     }
 
     public static boolean isValidType(URI uri, String ... types)

@@ -33,11 +33,6 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
     private boolean stretch = false;
     @OnlyIn(Dist.CLIENT) public ImageCache image = null;
 
-    protected PhotoFrameBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state)
-    {
-        super(type, pos, state);
-    }
-
     public PhotoFrameBlockEntity(BlockPos pos, BlockState state)
     {
         super(ModBlockEntities.PHOTO_FRAME.get(), pos, state);
@@ -170,6 +165,15 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
     public BlockPos getContainerPos()
     {
         return getBlockPos();
+    }
+
+    @Override
+    public void setRemoved()
+    {
+        super.setRemoved();
+        if (image != null)
+            image.release();
+        image = null;
     }
 
     public static final class ImageDownloadException extends Exception {

@@ -1,0 +1,36 @@
+{
+    "variants": {
+        "facing=north,portrait=true": {
+            "model": "cfm:block/monitor_portrait",
+            "y": 270
+        },
+        "facing=north,portrait=false": {
+            "model": "cfm:block/monitor",
+            "y": 270
+        },
+        "facing=east,portrait=true": {
+            "model": "cfm:block/monitor_portrait",
+            "y": 0
+        },
+        "facing=east,portrait=false": {
+            "model": "cfm:block/monitor",
+            "y": 0
+        },
+        "facing=south,portrait=true": {
+            "model": "cfm:block/monitor_portrait",
+            "y": 90
+        },
+        "facing=south,portrait=false": {
+            "model": "cfm:block/monitor",
+            "y": 90
+        },
+        "facing=west,portrait=true": {
+            "model": "cfm:block/monitor_portrait",
+            "y": 180
+        },
+        "facing=west,portrait=false": {
+            "model": "cfm:block/monitor",
+            "y": 180
+        }
+    }
+}

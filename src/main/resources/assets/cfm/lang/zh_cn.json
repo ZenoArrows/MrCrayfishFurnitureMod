@@ -484,6 +484,8 @@
     "block.cfm.green_photo_frame": "绿色相框",
     "block.cfm.red_photo_frame": "红色相框",
     "block.cfm.black_photo_frame": "黑色相框",
+    "block.cfm.tv": "电视",
+    "block.cfm.modern_tv": "现代电视",
     "item.cfm.spatula": "烹饪铲",
     "container.cfm.cabinet": "橱柜",
     "container.cfm.bedside_cabinet": "床头柜",
@@ -520,9 +522,13 @@
     "subtitle.cfm.diving_board.bounce": "跳水板：弹跳",
     "subtitle.cfm.open_fridge": "冰箱：打开",
     "subtitle.cfm.close_fridge": "冰箱：关闭",
-    "message.cfm.mail_queue_full": "该玩家的邮件队列已满。稍后再试...",
+    "gui.cfm.mail_queue_full": "该玩家的邮件队列已满。稍后再试...",
     "gui.cfm.photo_frame.success": "成功下载图片",
     "gui.cfm.photo_frame.failed": "下载文件失败",
     "gui.cfm.photo_frame.unknown_file": "链接不是一张图片",
-    "gui.cfm.photo_frame.too_large": "无法加载大于 2MB 的图片"
+    "gui.cfm.photo_frame.too_large": "无法加载大于 2MB 的图片",
+    "message.cfm.video.success": "成功下载 MP4 文件",
+    "message.cfm.video.failed": "下载文件失败",
+    "message.cfm.video.unknown_file": "链接不是 MP4 文件",
+    "message.cfm.video.too_large": "无法加载大于 2MB 的 MP4 文件"
 }

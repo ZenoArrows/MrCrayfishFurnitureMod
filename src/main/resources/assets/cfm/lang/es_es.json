@@ -484,6 +484,8 @@
     "block.cfm.green_photo_frame": "Marco de Fotos Verde",
     "block.cfm.red_photo_frame": "Marco de Fotos Rojo",
     "block.cfm.black_photo_frame": "Marco de Fotos Negro",
+    "block.cfm.tv": "TV",
+    "block.cfm.modern_tv": "TV Moderna",
     "item.cfm.spatula": "Espátula",
     "container.cfm.cabinet": "Armario",
     "container.cfm.bedside_cabinet": "Mesita de noche",
@@ -524,5 +526,9 @@
     "message.cfm.photo_frame.success": "Descarga exitosa de la imagen",
     "message.cfm.photo_frame.failed": "Error al descargar el archivo",
     "message.cfm.photo_frame.unknown_file": "La URL no es un GIF",
-    "message.cfm.photo_frame.too_large": "No se pueden cargar GIF de más de 2Mb"
+    "message.cfm.photo_frame.too_large": "No se pueden cargar GIF de más de 2Mb",
+    "message.cfm.video.success": "MP4 descargado con éxito",
+    "message.cfm.video.failed": "Error al descargar el archivo",
+    "message.cfm.video.unknown_file": "La URL no es un MP4",
+    "message.cfm.video.too_large": "No se pueden cargar MP4 de más de 2Mb"
 }
