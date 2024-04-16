@@ -1,19 +1,25 @@
 package com.mrcrayfish.furniture.tileentity;
 
+import com.mrcrayfish.furniture.block.PhotoFrameBlock;
+import com.mrcrayfish.furniture.client.DownloadUtils;
 import com.mrcrayfish.furniture.core.ModBlockEntities;
-import com.mrcrayfish.furniture.util.BlockEntityUtil;
+import me.srrapero720.watermedia.api.image.ImageAPI;
+import me.srrapero720.watermedia.api.image.ImageCache;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +31,7 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
 {
     private String url = null;
     private boolean stretch = false;
+    @OnlyIn(Dist.CLIENT) public ImageCache image = null;
 
     protected PhotoFrameBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state)
     {
@@ -41,6 +48,57 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
         return this.url != null ? this.url : "";
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public ImageCache loadPhoto() throws ImageDownloadException
+    {
+        URI uri = DownloadUtils.createUri(url);
+        if(uri == null)
+            throw new ImageDownloadException("message.cfm.photo_frame.invalid");
+
+        if(!DownloadUtils.isValidScheme(uri))
+            throw new ImageDownloadException("message.cfm.photo_frame.wrong_scheme");
+
+        if(!DownloadUtils.isValidType(uri, "png", "jpg", "jpeg", "gif"))
+            throw new ImageDownloadException("message.cfm.photo_frame.unsupported_type");
+
+        if(!DownloadUtils.isTrustedDomain(uri))
+            throw new ImageDownloadException("message.cfm.photo_frame.untrusted");
+
+        if (image == null || !image.url.equals(url))
+            image = ImageAPI.getCache(url, Minecraft.getInstance());
+
+        if (image.getStatus() == ImageCache.Status.WAITING)
+            image.load();
+
+        if (image.getStatus() == ImageCache.Status.FAILED)
+            throw new ImageDownloadException("message.cfm.photo_frame.failed", image.getException());
+
+        if (image.isVideo())
+            throw new ImageDownloadException("message.cfm.photo_frame.unknown_file");
+
+        return image;
+    }
+
+    public int getPhotoWidth()
+    {
+        BlockState state = getBlockState();
+        if (state.getBlock() instanceof PhotoFrameBlock photoFrame)
+        {
+            return photoFrame.getWidth(state, level, getBlockPos()) - 2;
+        }
+        return 14;
+    }
+
+    public int getPhotoHeight()
+    {
+        BlockState state = getBlockState();
+        if (state.getBlock() instanceof PhotoFrameBlock photoFrame)
+        {
+            return photoFrame.getHeight(state, level, getBlockPos()) - 2;
+        }
+        return 14;
+    }
+
     @Override
     public void load(CompoundTag compound)
     {
@@ -53,6 +111,11 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
         {
             this.stretch = compound.getBoolean("Stretch");
         }
+    }
+
+    public boolean isStretched()
+    {
+        return stretch;
     }
 
     @Override
@@ -107,5 +170,17 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
     public BlockPos getContainerPos()
     {
         return getBlockPos();
+    }
+
+    public static final class ImageDownloadException extends Exception {
+        public ImageDownloadException(String message)
+        {
+            super(message);
+        }
+
+        public ImageDownloadException(String message, Exception cause)
+        {
+            super(message, cause);
+        }
     }
 }

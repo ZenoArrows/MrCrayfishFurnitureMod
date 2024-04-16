@@ -13,6 +13,7 @@ import com.mrcrayfish.furniture.client.renderer.SeatRenderer;
 import com.mrcrayfish.furniture.client.renderer.tileentity.DoorMatBlockEntityRenderer;
 import com.mrcrayfish.furniture.client.renderer.tileentity.GrillBlockEntityRenderer;
 import com.mrcrayfish.furniture.client.renderer.tileentity.KitchenSinkBlockEntityRenderer;
+import com.mrcrayfish.furniture.client.renderer.tileentity.PhotoFrameBlockEntityRenderer;
 import com.mrcrayfish.furniture.core.ModBlockEntities;
 import com.mrcrayfish.furniture.core.ModBlocks;
 import com.mrcrayfish.furniture.core.ModContainers;
@@ -334,6 +335,7 @@ public class ClientHandler
         event.registerBlockEntityRenderer(ModBlockEntities.GRILL.get(), GrillBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.DOOR_MAT.get(), DoorMatBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_SINK.get(), KitchenSinkBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.PHOTO_FRAME.get(), PhotoFrameBlockEntityRenderer::new);
     }
 
     public static void onRegisterGeometryLoaders(ModelEvent.ModifyBakingResult event)

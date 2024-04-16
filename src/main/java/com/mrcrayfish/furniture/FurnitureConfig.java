@@ -3,6 +3,10 @@ package com.mrcrayfish.furniture;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 /**
  * Author: MrCrayfish
  */
@@ -11,6 +15,7 @@ public class FurnitureConfig
     public static class Client
     {
         public final ForgeConfigSpec.BooleanValue drawCollisionShapes;
+        public final ForgeConfigSpec.ConfigValue<List<String>> trustedUrlDomains;
 
         Client(ForgeConfigSpec.Builder builder)
         {
@@ -19,6 +24,10 @@ public class FurnitureConfig
                     .comment("Draws the collision shape rather than the selection shape when hovering blocks. Used for debugging collisions.")
                     .translation("cfm.configgui.drawCollisionShapes")
                     .define("drawCollisionShapes", false);
+            this.trustedUrlDomains = builder
+                    .comment("List of trusted domains to download images for the TV and Photo Frame. For example, the domain of the URL (https://i.imgur.com/Jvh1OQm.jpeg) is i.imgur.com")
+                    .translation("cfm.configgui.trustedUrlDomains")
+                    .define("trustedUrlDomains", new ArrayList<>(List.of("i.imgur.com")));
             builder.pop();
         }
     }

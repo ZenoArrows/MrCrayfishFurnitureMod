@@ -520,5 +520,9 @@
     "subtitle.cfm.diving_board.bounce": "Rebondis sur le Plongeoir",
     "subtitle.cfm.open_fridge": "Frigo Ouvert",
     "subtitle.cfm.close_fridge": "Frigo Fermer",
-    "message.cfm.mail_queue_full": "La file d'attente de courrier de ce joueur est pleine. Réessayez plus tard..."
+    "message.cfm.mail_queue_full": "La file d'attente de courrier de ce joueur est pleine. Réessayez plus tard...",
+    "message.cfm.photo_frame.success": "Image chargée avec succès",
+    "message.cfm.photo_frame.failed": "Chargement de l'image échoué",
+    "message.cfm.photo_frame.unknown_file": "L'URL ne cible pas une image",
+    "message.cfm.photo_frame.too_large": "Impossible de charger des images de plus de 2 Mb"
 }

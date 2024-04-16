@@ -520,5 +520,9 @@
     "subtitle.cfm.diving_board.bounce": "Salto no Trampolim de Picina",
     "subtitle.cfm.open_fridge": "Open Fridge",
     "subtitle.cfm.close_fridge": "Close Fridge",
-    "message.cfm.mail_queue_full": "This player's mail queue is full. Try again later..."
+    "message.cfm.mail_queue_full": "This player's mail queue is full. Try again later...",
+    "message.cfm.photo_frame.success": "A imagem foi transferida com sucesso",
+    "message.cfm.photo_frame.failed": "Falha ao baixar o arquivo",
+    "message.cfm.photo_frame.unknown_file": "URL não é uma imagem",
+    "message.cfm.photo_frame.too_large": "Nã é possível carregar imagens maiores que 2MB"
 }

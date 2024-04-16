@@ -520,5 +520,9 @@
     "subtitle.cfm.diving_board.bounce": "Rebote de plataforma de salto",
     "subtitle.cfm.open_fridge": "Nevera abierta",
     "subtitle.cfm.close_fridge": "Nevera cerrada",
-    "message.cfm.mail_queue_full": "La cola de correo del jugador está llena. Intentalo más tarde..."
+    "message.cfm.mail_queue_full": "La cola de correo del jugador está llena. Intentalo más tarde...",
+    "message.cfm.photo_frame.success": "Descarga exitosa de la imagen",
+    "message.cfm.photo_frame.failed": "Error al descargar el archivo",
+    "message.cfm.photo_frame.unknown_file": "La URL no es un GIF",
+    "message.cfm.photo_frame.too_large": "No se pueden cargar GIF de más de 2Mb"
 }

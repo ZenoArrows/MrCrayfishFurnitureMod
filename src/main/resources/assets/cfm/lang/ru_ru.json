@@ -520,5 +520,9 @@
     "subtitle.cfm.diving_board.bounce": "Пружинит трамплин",
     "subtitle.cfm.open_fridge": "Открыть холодильник",
     "subtitle.cfm.close_fridge": "Закрыть холодильник",
-    "message.cfm.mail_queue_full": "Почтовая очередь этого игрока заполнена. Попробуйте позже..."
+    "message.cfm.mail_queue_full": "Почтовая очередь этого игрока заполнена. Попробуйте позже...",
+    "message.cfm.photo_frame.success": "Изображение загружено успешно",
+    "message.cfm.photo_frame.failed": "Не удалось загрузить файл",
+    "message.cfm.photo_frame.unknown_file": "URL не является изображением",
+    "message.cfm.photo_frame.too_large": "Изображения больше 2 мегабайт недоступны для загрузки"
 }

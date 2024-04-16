@@ -523,5 +523,13 @@
     "message.cfm.mail_queue_full": "This player's mail queue is full. Try again later...",
     "gui.cfm.photo_frame_settings": "Photo Frame Options",
     "gui.cfm.off": "Off",
-    "gui.cfm.on": "On"
+    "gui.cfm.on": "On",
+    "message.cfm.photo_frame.success": "Successfully downloaded the image",
+    "message.cfm.photo_frame.failed": "Failed to download file",
+    "message.cfm.photo_frame.unknown_file": "URL is not an image",
+    "message.cfm.photo_frame.too_large": "Cannot load images larger than 2MB",
+    "message.cfm.photo_frame.untrusted": "Untrusted domain. Add the domain to config file to view image",
+    "message.cfm.photo_frame.invalid": "Invalid URL",
+    "message.cfm.photo_frame.wrong_scheme": "URL can only be HTTP or HTTPS",
+    "message.cfm.photo_frame.unsupported_type": "Image can only be PNG, JPEG or GIF"
 }

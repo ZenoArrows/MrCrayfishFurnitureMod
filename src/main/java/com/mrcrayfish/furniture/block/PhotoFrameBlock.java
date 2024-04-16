@@ -42,7 +42,7 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
 
     public PhotoFrameBlock(Properties properties)
     {
-        super(properties);
+        super(properties.dynamicShape());
         this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH).setValue(LEFT, Boolean.valueOf(false)).setValue(RIGHT, Boolean.valueOf(false)).setValue(TOP, Boolean.valueOf(false)).setValue(BOTTOM, Boolean.valueOf(false)));
         SHAPES = this.generateShapes(this.getStateDefinition().getPossibleStates());
     }
@@ -61,13 +61,19 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context)
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context)
     {
-        return SHAPES.get(state);
+        if (!isMasterFrame(state))
+            return SHAPES.get(state);
+
+        // Prevent the frame that's in control of rendering the photo from being culled away
+        int width = getWidth(state, reader, pos), height = getHeight(state, reader, pos);
+        return VoxelShapeHelper.rotate(Block.box(0, 0, 15, width, height, 16),
+                state.getValue(DIRECTION).getClockWise());
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter reader, BlockPos pos)
+    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context)
     {
         return SHAPES.get(state);
     }
@@ -87,6 +93,11 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
         return state.getValue(LEFT) || state.getValue(RIGHT) || state.getValue(TOP) || state.getValue(BOTTOM);
     }
 
+    public boolean isMasterFrame(BlockState state)
+    {
+        return !state.getValue(RIGHT) && !state.getValue(BOTTOM);
+    }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
@@ -101,7 +112,7 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
         BlockState top = blockgetter.getBlockState(blockpos.above());
         BlockState bottom = blockgetter.getBlockState(blockpos.below());
 
-        // First we try to connect to any loose frames or one-block wide row or column of portraits we can connect to.
+        // First we try to connect to any loose frames or one-block wide row or column of frames we can connect to.
         BlockState state = super.getStateForPlacement(context).setValue(DIRECTION, direction);
         state = state.setValue(LEFT, left == state || left == state.setValue(LEFT, Boolean.TRUE))
                 .setValue(RIGHT, right == state || right == state.setValue(RIGHT, Boolean.TRUE))
@@ -183,8 +194,46 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
     {
+        // Find the bottom-right corner of the frame
+        Direction direction = state.getValue(DIRECTION).getCounterClockWise();
+        while(!isMasterFrame(state))
+        {
+            if(state.getValue(RIGHT))
+                pos = pos.relative(direction);
+            if(state.getValue(BOTTOM))
+                pos = pos.below();
+            state = level.getBlockState(pos);
+            if (state.getBlock() != this)
+                return InteractionResult.FAIL;
+        }
+
         if(level.isClientSide())
             ClientHandler.showEditValueContainerScreen(level, pos, Component.translatable("gui.cfm.photo_frame_settings"));
         return InteractionResult.SUCCESS;
+    }
+
+    public int getWidth(BlockState state, BlockGetter reader, BlockPos pos)
+    {
+        // Count the number of frames until we hit the left-most edge
+        int width = 16;
+        Direction left = state.getValue(DIRECTION).getClockWise();
+        for(int i = 1; state.getBlock() == this && state.getValue(LEFT);
+            state = reader.getBlockState(pos.relative(left, i++)))
+        {
+            width += 16;
+        }
+        return width;
+    }
+
+    public int getHeight(BlockState state, BlockGetter reader, BlockPos pos)
+    {
+        // Count the number of frames until we hit the top-most edge
+        int height = 16;
+        for(int i = 1; state.getBlock() == this && state.getValue(TOP);
+            state = reader.getBlockState(pos.above(i++)))
+        {
+            height += 16;
+        }
+        return height;
     }
 }
