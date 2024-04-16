@@ -39,6 +39,7 @@ public class EditValueContainerScreen extends Screen
     @Override
     public void init()
     {
+        values.clear();
         valueContainer.getEntries().forEach(entry ->
         {
             if(entry.getType() != null)
