@@ -26,6 +26,7 @@ public class ModSounds
     public static final RegistryObject<SoundEvent> BLOCK_DIVING_BOARD_BOUNCE = register("block.diving_board.bounce");
     public static final RegistryObject<SoundEvent> BLOCK_FRIDGE_OPEN = register("block.fridge.open");
     public static final RegistryObject<SoundEvent> BLOCK_FRIDGE_CLOSE = register("block.fridge.close");
+    public static final RegistryObject<SoundEvent> BLOCK_WHITE_NOISE = register("block.tv.white_noise");
 
     private static RegistryObject<SoundEvent> register(String name)
     {

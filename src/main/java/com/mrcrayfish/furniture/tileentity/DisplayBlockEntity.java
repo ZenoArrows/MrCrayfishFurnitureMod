@@ -3,6 +3,7 @@ package com.mrcrayfish.furniture.tileentity;
 import com.mrcrayfish.furniture.block.AbstractDisplayBlock;
 import com.mrcrayfish.furniture.client.DownloadUtils;
 import com.mrcrayfish.furniture.core.ModBlockEntities;
+import com.mrcrayfish.furniture.util.BlockEntityUtil;
 import me.srrapero720.watermedia.api.player.SyncVideoPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -43,9 +44,26 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         super(ModBlockEntities.DISPLAY.get(), pos, state);
     }
 
+    public void setPowered(boolean powered)
+    {
+        this.powered = powered;
+        BlockEntityUtil.sendUpdatePacket(this);
+    }
+
     public boolean isPowered()
     {
         return powered;
+    }
+
+    public boolean nextChannel()
+    {
+        if(powered && channels.size() > 1)
+        {
+            currentChannel = (currentChannel + 1) % channels.size();
+            BlockEntityUtil.sendUpdatePacket(this);
+            return true;
+        }
+        return false;
     }
 
     @Nullable
@@ -61,19 +79,6 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
     @OnlyIn(Dist.CLIENT)
     public SyncVideoPlayer loadVideo() throws VideoDownloadException
     {
-        if(player == null)
-        {
-            player = new SyncVideoPlayer(Minecraft.getInstance());
-            player.setMuteMode(muted);
-        }
-        else if (player.isMuted() != muted)
-        {
-            player.setMuteMode(muted);
-        }
-
-        if (player.isEnded())
-            currentChannel = (currentChannel + 1) % channels.size();
-
         URI uri = DownloadUtils.createUri(getCurrentChannel());
         if(uri == null)
             throw new VideoDownloadException("message.cfm.video.invalid");
@@ -83,6 +88,15 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
 
         if(!DownloadUtils.isTrustedDomain(uri))
             throw new VideoDownloadException("message.cfm.video.untrusted");
+
+        if(player == null)
+        {
+            player = new SyncVideoPlayer(Minecraft.getInstance());
+            player.setRepeatMode(true);
+        }
+
+        if(player.isMuted() != muted)
+            player.setMuteMode(muted);
 
         if(!channels.get(currentChannel).equals(url))
             player.start(getCurrentChannel());
@@ -153,6 +167,14 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         {
             this.currentChannel = compound.getInt("CurrentChannel");
         }
+        if(compound.contains("Stretch", Tag.TAG_BYTE))
+        {
+            this.stretched = compound.getBoolean("Stretch");
+        }
+        if(compound.contains("Mute", Tag.TAG_BYTE))
+        {
+            this.muted = compound.getBoolean("Mute");
+        }
         if(compound.contains("Powered", Tag.TAG_BYTE))
         {
             this.powered = compound.getBoolean("Powered");
@@ -161,10 +183,6 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
                 player.release();
                 player = null;
             }
-        }
-        if(compound.contains("Stretch", Tag.TAG_BYTE))
-        {
-            this.stretched = compound.getBoolean("Stretch");
         }
     }
 
@@ -181,7 +199,8 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         channels.forEach(url -> channelList.add(StringTag.valueOf(url)));
         tag.put("Channels", channelList);
         tag.putInt("CurrentChannel", currentChannel);
-        tag.putBoolean("Crop", stretched);
+        tag.putBoolean("Stretch", stretched);
+        tag.putBoolean("Mute", muted);
         tag.putBoolean("Powered", powered);
     }
 
