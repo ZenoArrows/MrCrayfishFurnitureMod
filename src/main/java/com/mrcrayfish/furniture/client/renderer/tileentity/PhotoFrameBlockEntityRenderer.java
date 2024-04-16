@@ -9,6 +9,7 @@ import com.mrcrayfish.furniture.tileentity.PhotoFrameBlockEntity;
 import me.srrapero720.watermedia.api.image.ImageCache;
 import me.srrapero720.watermedia.api.image.ImageRenderer;
 import me.srrapero720.watermedia.api.math.MathAPI;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -21,6 +22,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
@@ -75,7 +77,7 @@ public class PhotoFrameBlockEntityRenderer implements BlockEntityRenderer<PhotoF
         double frameYOffset = 1;
         double frameZOffset = 7.49;
 
-        //Setups translations
+        //Setup translations
         poseStack.translate(8 * 0.0625, frameYOffset * 0.0625, 8 * 0.0625);
         Direction direction = state.getValue(FurnitureHorizontalBlock.DIRECTION);
         poseStack.mulPose(direction.getRotation().rotateX(-(float)Math.PI / 2F).rotateY((float)Math.PI));
@@ -88,9 +90,9 @@ public class PhotoFrameBlockEntityRenderer implements BlockEntityRenderer<PhotoF
 
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            RenderSystem.setShaderColor(0.65F, 0.65F, 0.65F, 1.0F);
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShader(GameRenderer::getRendertypeSolidShader);
+            Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
 
             float startX = 0.0F;
             float startY = 0.0F;
@@ -112,29 +114,36 @@ public class PhotoFrameBlockEntityRenderer implements BlockEntityRenderer<PhotoF
 
                 poseStack.translate(0, 0, -0.01 * 0.0625);
                 Matrix4f matrix = poseStack.last().pose();
+                Matrix3f rot = new Matrix3f(matrix);
                 Tesselator tesselator = Tesselator.getInstance();
                 BufferBuilder buffer = tesselator.getBuilder();
-                buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-                buffer.vertex(matrix, startX, startY, 0).uv(u, v).endVertex();
-                buffer.vertex(matrix, startX, startY + frameHeight, 0).uv(u, v + scaledHeight * pixelScale).endVertex();
-                buffer.vertex(matrix, startX + frameWidth, startY + frameHeight, 0).uv(u + scaledWidth * pixelScale, v + scaledHeight * pixelScale).endVertex();
-                buffer.vertex(matrix, startX + frameWidth, startY, 0).uv(u + scaledWidth * pixelScale, v).endVertex();
+                buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
+                buffer.defaultColor(255, 255, 255, 255);
+                buffer.vertex(matrix, startX, startY, 0).uv(u, v)
+                        .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                buffer.vertex(matrix, startX, startY + frameHeight, 0).uv(u, v + scaledHeight * pixelScale)
+                        .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                buffer.vertex(matrix, startX + frameWidth, startY + frameHeight, 0).uv(u + scaledWidth * pixelScale, v + scaledHeight * pixelScale)
+                        .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                buffer.vertex(matrix, startX + frameWidth, startY, 0).uv(u + scaledWidth * pixelScale, v)
+                        .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                buffer.unsetDefaultColor();
                 tesselator.end();
             }
             else if(image.getStatus() == ImageCache.Status.READY)
             {
                 int texture = -1;
                 ImageRenderer renderer = image.getRenderer();
-                if (renderer != null)
+                if(renderer != null)
                     texture = renderer.texture((int)level.getGameTime(), MathAPI.tickToMs(partialTicks), true);
-                if (texture != -1)
+                if(texture != -1)
                 {
                     RenderSystem.setShaderTexture(0, texture);
 
                     float imageWidth = frameWidth;
                     float imageHeight = frameHeight;
 
-                    if (!tileEntity.isStretched())
+                    if(!tileEntity.isStretched())
                     {
                         //Calculates the positioning and scale so the GIF keeps its ratio and renders within the screen
                         float scaleWidth = frameWidth / (float) renderer.width;
@@ -154,18 +163,25 @@ public class PhotoFrameBlockEntityRenderer implements BlockEntityRenderer<PhotoF
                     //Render the Image
                     poseStack.translate(0, 0, -0.01 * 0.0625);
                     Matrix4f matrix = poseStack.last().pose();
+                    Matrix3f rot = new Matrix3f(matrix);
                     Tesselator tesselator = Tesselator.getInstance();
                     BufferBuilder buffer = tesselator.getBuilder();
-                    buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-                    buffer.vertex(matrix, startX, startY, 0).uv(1, 1).endVertex();
-                    buffer.vertex(matrix, startX, startY + imageHeight, 0).uv(1, 0).endVertex();
-                    buffer.vertex(matrix, startX + imageWidth, startY + imageHeight, 0).uv(0, 0).endVertex();
-                    buffer.vertex(matrix, startX + imageWidth, startY, 0).uv(0, 1).endVertex();
+                    buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
+                    buffer.defaultColor(255, 255, 255, 255);
+                    buffer.vertex(matrix, startX, startY, 0).uv(1, 1)
+                            .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                    buffer.vertex(matrix, startX, startY + imageHeight, 0).uv(1, 0)
+                            .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                    buffer.vertex(matrix, startX + imageWidth, startY + imageHeight, 0).uv(0, 0)
+                            .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                    buffer.vertex(matrix, startX + imageWidth, startY, 0).uv(0, 1)
+                            .uv2(light).normal(rot, 1, 0, 0).endVertex();
+                    buffer.unsetDefaultColor();
                     tesselator.end();
                 }
             }
         }
-        catch (PhotoFrameBlockEntity.ImageDownloadException e)
+        catch(PhotoFrameBlockEntity.ImageDownloadException e)
         {
             poseStack.translate(frameWidth * 0.0625 - 0.0625, frameHeight * 0.0625 - 0.0625, 0);
             poseStack.scale(1, -1, -1);
@@ -178,7 +194,6 @@ public class PhotoFrameBlockEntityRenderer implements BlockEntityRenderer<PhotoF
         }
         finally
         {
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.disableDepthTest();
             RenderSystem.disableBlend();
         }
