@@ -48,19 +48,19 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         return powered;
     }
 
+    @Nullable
+    public String getCurrentChannel()
+    {
+        if(channels.size() > 0 && currentChannel >= 0 && currentChannel < channels.size())
+        {
+            return channels.get(currentChannel);
+        }
+        return null;
+    }
+
     @OnlyIn(Dist.CLIENT)
     public SyncVideoPlayer loadVideo() throws VideoDownloadException
     {
-        URI uri = DownloadUtils.createUri(channels.get(currentChannel));
-        if(uri == null)
-            throw new VideoDownloadException("message.cfm.video.invalid");
-
-        if(!DownloadUtils.isValidScheme(uri))
-            throw new VideoDownloadException("message.cfm.video.wrong_scheme");
-
-        if(!DownloadUtils.isTrustedDomain(uri))
-            throw new VideoDownloadException("message.cfm.video.untrusted");
-
         if(player == null)
         {
             player = new SyncVideoPlayer(Minecraft.getInstance());
@@ -74,8 +74,18 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         if (player.isEnded())
             currentChannel = (currentChannel + 1) % channels.size();
 
+        URI uri = DownloadUtils.createUri(getCurrentChannel());
+        if(uri == null)
+            throw new VideoDownloadException("message.cfm.video.invalid");
+
+        if(!DownloadUtils.isValidScheme(uri))
+            throw new VideoDownloadException("message.cfm.video.wrong_scheme");
+
+        if(!DownloadUtils.isTrustedDomain(uri))
+            throw new VideoDownloadException("message.cfm.video.untrusted");
+
         if(!channels.get(currentChannel).equals(url))
-            player.start(channels.get(currentChannel));
+            player.start(getCurrentChannel());
         url = channels.get(currentChannel);
 
         if(player.isBroken())
