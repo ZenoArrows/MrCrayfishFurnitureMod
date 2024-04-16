@@ -67,6 +67,11 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock
         return state.getBlock() == this && state.getValue(DIRECTION) == direction;
     }
 
+    public boolean isConnected(BlockState state, BooleanProperty side)
+    {
+        return state.getBlock() == this && state.getValue(side);
+    }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
@@ -81,26 +86,58 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock
 
         return super.getStateForPlacement(context)
                 .setValue(DIRECTION, direction)
-                .setValue(LEFT, Boolean.valueOf(this.connectsTo(left, direction)))
-                .setValue(RIGHT, Boolean.valueOf(this.connectsTo(right, direction)))
-                .setValue(TOP, Boolean.valueOf(this.connectsTo(top, direction)))
-                .setValue(BOTTOM, Boolean.valueOf(this.connectsTo(bottom, direction)));
+                .setValue(LEFT, Boolean.valueOf(connectsTo(left, direction)))
+                .setValue(RIGHT, Boolean.valueOf(connectsTo(right, direction)))
+                .setValue(TOP, Boolean.valueOf(connectsTo(top, direction)))
+                .setValue(BOTTOM, Boolean.valueOf(connectsTo(bottom, direction)));
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction side, BlockState otherState, LevelAccessor accessor, BlockPos pos, BlockPos otherPos)
+    public BlockState updateShape(BlockState state, Direction side, BlockState otherState, LevelAccessor accessor, BlockPos blockpos, BlockPos otherPos)
     {
         Direction direction = state.getValue(DIRECTION);
+        BlockPos left = blockpos.relative(direction.getClockWise());
+        BlockPos right = blockpos.relative(direction.getCounterClockWise());
+        BlockPos top = blockpos.above();
+        BlockPos bottom = blockpos.below();
+
         if (side == Direction.UP)
-            return state.setValue(TOP, Boolean.valueOf(connectsTo(otherState, direction)));
+        {
+            if (isConnected(otherState, BOTTOM))
+                return state.setValue(TOP, Boolean.TRUE)
+                        .setValue(LEFT, otherState.getValue(LEFT) && connectsTo(accessor.getBlockState(left), direction))
+                        .setValue(RIGHT, otherState.getValue(RIGHT) && connectsTo(accessor.getBlockState(right), direction));
+            else
+                return state.setValue(TOP, Boolean.FALSE);
+        }
         else if (side == Direction.DOWN)
-            return state.setValue(BOTTOM, Boolean.valueOf(connectsTo(otherState, direction)));
+        {
+            if (isConnected(otherState, TOP))
+                return state.setValue(BOTTOM, Boolean.TRUE)
+                        .setValue(LEFT, otherState.getValue(LEFT) && connectsTo(accessor.getBlockState(left), direction))
+                        .setValue(RIGHT, otherState.getValue(RIGHT) && connectsTo(accessor.getBlockState(right), direction));
+            else
+                return state.setValue(BOTTOM, Boolean.FALSE);
+        }
         else if (side == direction.getClockWise())
-            return state.setValue(LEFT, Boolean.valueOf(connectsTo(otherState, direction)));
+        {
+            if (isConnected(otherState, RIGHT))
+                return state.setValue(LEFT, Boolean.TRUE)
+                        .setValue(TOP, otherState.getValue(TOP) && connectsTo(accessor.getBlockState(top), direction))
+                        .setValue(BOTTOM, otherState.getValue(BOTTOM) && connectsTo(accessor.getBlockState(bottom), direction));
+            else
+                return state.setValue(LEFT, Boolean.FALSE);
+        }
         else if (side == direction.getCounterClockWise())
-            return state.setValue(RIGHT, Boolean.valueOf(connectsTo(otherState, direction)));
-        else
-            return super.updateShape(state, side, otherState, accessor, pos, otherPos);
+        {
+            if (isConnected(otherState, LEFT))
+                return state.setValue(RIGHT, Boolean.TRUE)
+                        .setValue(TOP, otherState.getValue(TOP) && connectsTo(accessor.getBlockState(top), direction))
+                        .setValue(BOTTOM, otherState.getValue(BOTTOM) && connectsTo(accessor.getBlockState(bottom), direction));
+            else
+                return state.setValue(RIGHT, Boolean.FALSE);
+        }
+        return super.updateShape(state, side, otherState, accessor, blockpos, otherPos);
     }
 
     @Override
