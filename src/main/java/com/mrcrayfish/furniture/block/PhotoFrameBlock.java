@@ -2,18 +2,35 @@ package com.mrcrayfish.furniture.block;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.mrcrayfish.furniture.client.ClientHandler;
+import com.mrcrayfish.furniture.client.gui.screen.EditValueContainerScreen;
+import com.mrcrayfish.furniture.tileentity.IValueContainer;
+import com.mrcrayfish.furniture.tileentity.MailBoxBlockEntity;
+import com.mrcrayfish.furniture.tileentity.PhotoFrameBlockEntity;
+import com.mrcrayfish.furniture.util.BlockEntityUtil;
 import com.mrcrayfish.furniture.util.VoxelShapeHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +38,7 @@ import java.util.List;
 /**
  * Author: MrCrayfish
  */
-public class PhotoFrameBlock extends FurnitureHorizontalBlock
+public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityBlock
 {
     public static final BooleanProperty LEFT = BooleanProperty.create("left");
     public static final BooleanProperty RIGHT = BooleanProperty.create("right");
@@ -147,5 +164,20 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock
     {
         super.createBlockStateDefinition(builder);
         builder.add(LEFT, RIGHT, TOP, BOTTOM);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state)
+    {
+        return new PhotoFrameBlockEntity(pos, state);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
+    {
+        if (level.isClientSide())
+            ClientHandler.showEditValueContainerScreen(level, pos, Component.translatable("gui.cfm.photo_frame_settings"));
+        return InteractionResult.SUCCESS;
     }
 }

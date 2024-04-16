@@ -3,6 +3,7 @@ package com.mrcrayfish.furniture.client;
 import com.mrcrayfish.furniture.Reference;
 import com.mrcrayfish.furniture.client.event.CreativeScreenEvents;
 import com.mrcrayfish.furniture.client.gui.screen.DoorMatScreen;
+import com.mrcrayfish.furniture.client.gui.screen.EditValueContainerScreen;
 import com.mrcrayfish.furniture.client.gui.screen.inventory.CrateScreen;
 import com.mrcrayfish.furniture.client.gui.screen.inventory.FreezerScreen;
 import com.mrcrayfish.furniture.client.gui.screen.inventory.MailBoxScreen;
@@ -17,6 +18,7 @@ import com.mrcrayfish.furniture.core.ModBlocks;
 import com.mrcrayfish.furniture.core.ModContainers;
 import com.mrcrayfish.furniture.core.ModEntities;
 import com.mrcrayfish.furniture.tileentity.DoorMatBlockEntity;
+import com.mrcrayfish.furniture.tileentity.IValueContainer;
 import com.mrcrayfish.furniture.tileentity.TrampolineBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -24,6 +26,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
@@ -55,6 +58,14 @@ public class ClientHandler
         if(level.getBlockEntity(pos) instanceof DoorMatBlockEntity blockEntity)
         {
             Minecraft.getInstance().setScreen(new DoorMatScreen(blockEntity));
+        }
+    }
+
+    public static void showEditValueContainerScreen(Level level, BlockPos pos, Component title)
+    {
+        if(level.getBlockEntity(pos) instanceof IValueContainer blockEntity)
+        {
+            Minecraft.getInstance().setScreen(new EditValueContainerScreen(title, blockEntity));
         }
     }
 

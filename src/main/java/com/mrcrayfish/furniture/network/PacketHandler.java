@@ -1,13 +1,7 @@
 package com.mrcrayfish.furniture.network;
 
 import com.mrcrayfish.furniture.Reference;
-import com.mrcrayfish.furniture.network.message.C2SMessageLockCrate;
-import com.mrcrayfish.furniture.network.message.C2SMessageOpenMailBox;
-import com.mrcrayfish.furniture.network.message.C2SMessageSendMail;
-import com.mrcrayfish.furniture.network.message.C2SMessageSetDoorMat;
-import com.mrcrayfish.furniture.network.message.C2SMessageSetMailBoxName;
-import com.mrcrayfish.furniture.network.message.IMessage;
-import com.mrcrayfish.furniture.network.message.S2CMessageFlipGrill;
+import com.mrcrayfish.furniture.network.message.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -40,6 +34,7 @@ public class PacketHandler
         register(C2SMessageOpenMailBox.class, new C2SMessageOpenMailBox(), NetworkDirection.PLAY_TO_SERVER);
         register(S2CMessageFlipGrill.class, new S2CMessageFlipGrill(), NetworkDirection.PLAY_TO_CLIENT);
         register(C2SMessageSetDoorMat.class, new C2SMessageSetDoorMat(), NetworkDirection.PLAY_TO_SERVER);
+        register(C2SMessageUpdateValueContainer.class, new C2SMessageUpdateValueContainer(), NetworkDirection.PLAY_TO_SERVER);
     }
 
     private static <T> void register(Class<T> clazz, IMessage<T> message, @Nullable NetworkDirection direction)

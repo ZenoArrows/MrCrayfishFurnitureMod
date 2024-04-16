@@ -1,21 +1,21 @@
 package com.mrcrayfish.furniture.network.play;
 
+import com.mrcrayfish.furniture.FurnitureMod;
 import com.mrcrayfish.furniture.common.mail.Mail;
 import com.mrcrayfish.furniture.common.mail.PostOffice;
 import com.mrcrayfish.furniture.inventory.container.CrateMenu;
 import com.mrcrayfish.furniture.inventory.container.PostBoxMenu;
-import com.mrcrayfish.furniture.network.message.C2SMessageLockCrate;
-import com.mrcrayfish.furniture.network.message.C2SMessageOpenMailBox;
-import com.mrcrayfish.furniture.network.message.C2SMessageSendMail;
-import com.mrcrayfish.furniture.network.message.C2SMessageSetDoorMat;
-import com.mrcrayfish.furniture.network.message.C2SMessageSetMailBoxName;
+import com.mrcrayfish.furniture.network.message.*;
 import com.mrcrayfish.furniture.tileentity.CrateBlockEntity;
 import com.mrcrayfish.furniture.tileentity.DoorMatBlockEntity;
+import com.mrcrayfish.furniture.tileentity.IValueContainer;
 import com.mrcrayfish.furniture.tileentity.MailBoxBlockEntity;
 import com.mrcrayfish.furniture.util.BlockEntityUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkHooks;
 
 /**
@@ -110,5 +110,24 @@ public class ServerPlayHandler
 
         BlockEntityUtil.sendUpdatePacket(mailBox);
         NetworkHooks.openScreen(player, mailBox, message.getPos());
+    }
+
+    public static void handleUpdateValueContainerMessage(ServerPlayer player, C2SMessageUpdateValueContainer message)
+    {
+        Level level = player.level();
+        if(!level.isLoaded(message.getPos()))
+            return;
+
+        BlockEntity entity = level.getBlockEntity(message.getPos());
+        if(entity instanceof IValueContainer container)
+        {
+            String result = container.updateEntries(message.getEntryMap(), player);
+            if(result != null)
+            {
+                FurnitureMod.LOGGER.warn(result);
+                return;
+            }
+            BlockEntityUtil.sendUpdatePacket(entity);
+        }
     }
 }

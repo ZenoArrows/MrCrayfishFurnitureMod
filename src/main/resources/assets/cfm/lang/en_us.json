@@ -520,5 +520,8 @@
     "subtitle.cfm.diving_board.bounce": "Diving Board Bounce",
     "subtitle.cfm.open_fridge": "Open Fridge",
     "subtitle.cfm.close_fridge": "Close Fridge",
-    "message.cfm.mail_queue_full": "This player's mail queue is full. Try again later..."
+    "message.cfm.mail_queue_full": "This player's mail queue is full. Try again later...",
+    "gui.cfm.photo_frame_settings": "Photo Frame Options",
+    "gui.cfm.off": "Off",
+    "gui.cfm.on": "On"
 }
