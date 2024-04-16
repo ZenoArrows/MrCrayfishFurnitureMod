@@ -101,9 +101,9 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         if(player.isPaused() != Minecraft.getInstance().isPaused())
             player.setPauseMode(Minecraft.getInstance().isPaused());
 
-        if(!channels.get(currentChannel).equals(url))
+        if(!getCurrentChannel().equals(url))
             player.start(getCurrentChannel());
-        url = channels.get(currentChannel);
+        url = getCurrentChannel();
 
         if(player.isBroken())
             throw new VideoDownloadException("message.cfm.video.failed");
@@ -181,11 +181,23 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         if(compound.contains("Powered", Tag.TAG_BYTE))
         {
             this.powered = compound.getBoolean("Powered");
-            if(!this.powered && player != null)
-            {
-                player.release();
-                player = null;
-            }
+        }
+
+        if(level != null && level.isClientSide())
+        {
+            Minecraft.getInstance().submit(() -> {
+                try
+                {
+                    if(this.powered)
+                        loadVideo();
+                    else
+                        releasePlayer();
+                }
+                catch (VideoDownloadException e)
+                {
+                    // Errors will be reported later
+                }
+            });
         }
     }
 
@@ -270,13 +282,18 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         return getBlockPos();
     }
 
+    private void releasePlayer()
+    {
+        if (player != null)
+            player.release();
+        player = null;
+        url = null;
+    }
+
     @Override
     public void setRemoved()
     {
         super.setRemoved();
-        if (player != null)
-            player.release();
-        player = null;
     }
 
     public static final class VideoDownloadException extends Exception {

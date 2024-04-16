@@ -12,6 +12,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -106,6 +107,23 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
         {
             this.stretch = compound.getBoolean("Stretch");
         }
+
+        if(level != null && level.isClientSide())
+        {
+            Minecraft.getInstance().submit(() -> {
+                try
+                {
+                    if(StringUtil.isNullOrEmpty(url))
+                        releaseImage();
+                    else
+                        loadPhoto();
+                }
+                catch (ImageDownloadException e)
+                {
+                    // Errors will be reported later
+                }
+            });
+        }
     }
 
     public boolean isStretched()
@@ -167,13 +185,18 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
         return getBlockPos();
     }
 
+    private void releaseImage()
+    {
+        if (image != null)
+            image.release();
+        image = null;
+    }
+
     @Override
     public void setRemoved()
     {
         super.setRemoved();
-        if (image != null)
-            image.release();
-        image = null;
+        releaseImage();
     }
 
     public static final class ImageDownloadException extends Exception {
