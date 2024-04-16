@@ -339,6 +339,59 @@ public class RecipeGen extends RecipeProvider
         photoFrame(consumer, ModBlocks.PHOTO_FRAME_RED.get(), Blocks.RED_CONCRETE);
         photoFrame(consumer, ModBlocks.PHOTO_FRAME_BLACK.get(), Blocks.BLACK_CONCRETE);
 
+        // TV
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.TV.get())
+                .pattern("III")
+                .pattern("IGI")
+                .pattern("IRI")
+                .define('G', Blocks.GLASS_PANE)
+                .define('R', Items.REDSTONE)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_glass", has(Tags.Items.GLASS))
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON))
+                .save(consumer);
+
+        // Modern TV
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.MODERN_TV.get())
+                .pattern("III")
+                .pattern("GGG")
+                .pattern("IRI")
+                .define('G', Blocks.GLASS_PANE)
+                .define('R', Items.REDSTONE)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_glass", has(Tags.Items.GLASS))
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON))
+                .save(consumer);
+
+        // Monitor
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.MONITOR.get())
+                .pattern("IGI")
+                .pattern("IGI")
+                .pattern("IRI")
+                .define('G', Blocks.GLASS_PANE)
+                .define('R', Items.REDSTONE)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_glass", has(Tags.Items.GLASS))
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON))
+                .save(consumer);
+
+        // TV Remote
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TV_REMOTE.get())
+                .pattern("ISI")
+                .pattern("IBI")
+                .pattern("IRI")
+                .define('I', Items.IRON_INGOT)
+                .define('S', Blocks.DAYLIGHT_DETECTOR)
+                .define('B', Blocks.STONE_BUTTON)
+                .define('R', Blocks.REDSTONE_BLOCK)
+                .unlockedBy("has_daylight_detector", has(Items.DAYLIGHT_DETECTOR))
+                .unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON))
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .save(consumer);
+
         // Spatula
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SPATULA.get())
                 .pattern("B")
