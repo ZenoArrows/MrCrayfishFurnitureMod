@@ -32,7 +32,7 @@ public class DownloadUtils
     {
         String scheme = uri.getScheme();
         // Only allow http or https
-        return scheme != null && (scheme.equals("http") || scheme.equals("https") || scheme.equals("file") || scheme.equals("minecraft"));
+        return scheme != null && (scheme.equals("http") || scheme.equals("https") || scheme.equals("file") || scheme.equals("local"));
     }
 
     public static boolean isValidType(URI uri, String ... types)
@@ -57,6 +57,10 @@ public class DownloadUtils
 
     public static boolean isTrustedDomain(URI uri)
     {
+        String scheme = uri.getScheme();
+        if (scheme.equals("file") || scheme.equals("local"))
+            return true;
+
         // Validate the domain name
         String domain = uri.getHost();
         if(domain == null)
