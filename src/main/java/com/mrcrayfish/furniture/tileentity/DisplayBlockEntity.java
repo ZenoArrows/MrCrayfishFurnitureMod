@@ -98,6 +98,9 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         if(player.isMuted() != muted)
             player.setMuteMode(muted);
 
+        if(player.isPaused() != Minecraft.getInstance().isPaused())
+            player.setPauseMode(Minecraft.getInstance().isPaused());
+
         if(!channels.get(currentChannel).equals(url))
             player.start(getCurrentChannel());
         url = channels.get(currentChannel);

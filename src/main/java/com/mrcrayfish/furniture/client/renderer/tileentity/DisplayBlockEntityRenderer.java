@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mrcrayfish.furniture.block.FurnitureHorizontalBlock;
 import com.mrcrayfish.furniture.tileentity.DisplayBlockEntity;
+import me.lib720.caprica.vlcj.player.base.State;
 import me.srrapero720.watermedia.api.player.SyncVideoPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -85,7 +86,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
             float startX = 0.0F;
             float startY = 0.0F;
 
-            if(player.isReady() && !player.isPlaying())
+            if(player.getRawPlayerState().equals(State.OPENING))
             {
                 RenderSystem.setShaderTexture(0, NOISE);
 
@@ -118,7 +119,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
                 buffer.unsetDefaultColor();
                 tesselator.end();
             }
-            else if(player.isPlaying())
+            else if(player.isReady())
             {
                 int texture = player.getGlTexture();
                 if(texture != -1)
