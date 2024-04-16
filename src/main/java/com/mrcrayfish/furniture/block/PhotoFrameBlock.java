@@ -3,17 +3,11 @@ package com.mrcrayfish.furniture.block;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.mrcrayfish.furniture.client.ClientHandler;
-import com.mrcrayfish.furniture.client.gui.screen.EditValueContainerScreen;
-import com.mrcrayfish.furniture.tileentity.IValueContainer;
-import com.mrcrayfish.furniture.tileentity.MailBoxBlockEntity;
 import com.mrcrayfish.furniture.tileentity.PhotoFrameBlockEntity;
-import com.mrcrayfish.furniture.util.BlockEntityUtil;
 import com.mrcrayfish.furniture.util.VoxelShapeHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +23,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -84,9 +77,14 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
         return state.getBlock() == this && state.getValue(DIRECTION) == direction;
     }
 
-    public boolean isConnected(BlockState state, BooleanProperty side)
+    public boolean canConnect(BlockState state, BooleanProperty side)
     {
         return state.getBlock() == this && state.getValue(side);
+    }
+
+    public boolean isConnected(BlockState state)
+    {
+        return state.getValue(LEFT) || state.getValue(RIGHT) || state.getValue(TOP) || state.getValue(BOTTOM);
     }
 
     @Override
@@ -95,7 +93,7 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
         BlockGetter blockgetter = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
         Direction direction = context.getClickedFace();
-        if (direction.getAxis().isVertical())
+        if(direction.getAxis().isVertical())
             direction = context.getHorizontalDirection().getOpposite();
 
         BlockState left = blockgetter.getBlockState(blockpos.relative(direction.getClockWise()));
@@ -103,12 +101,21 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
         BlockState top = blockgetter.getBlockState(blockpos.above());
         BlockState bottom = blockgetter.getBlockState(blockpos.below());
 
-        return super.getStateForPlacement(context)
-                .setValue(DIRECTION, direction)
-                .setValue(LEFT, Boolean.valueOf(connectsTo(left, direction)))
-                .setValue(RIGHT, Boolean.valueOf(connectsTo(right, direction)))
-                .setValue(TOP, Boolean.valueOf(connectsTo(top, direction)))
-                .setValue(BOTTOM, Boolean.valueOf(connectsTo(bottom, direction)));
+        // First we try to connect to any loose frames or one-block wide row or column of portraits we can connect to.
+        BlockState state = super.getStateForPlacement(context).setValue(DIRECTION, direction);
+        state = state.setValue(LEFT, left == state || left == state.setValue(LEFT, Boolean.TRUE))
+                .setValue(RIGHT, right == state || right == state.setValue(RIGHT, Boolean.TRUE))
+                .setValue(TOP, top == state || top == state.setValue(TOP, Boolean.TRUE))
+                .setValue(BOTTOM, bottom == state || bottom == state.setValue(BOTTOM, Boolean.TRUE));
+
+        if(!isConnected(state))
+            return state;
+
+        // If we managed to connect to another frame, then connect to any other neighbouring frames to create a rectangle.
+        return state.setValue(LEFT, connectsTo(left, direction))
+                .setValue(RIGHT, connectsTo(right, direction))
+                .setValue(TOP, connectsTo(top, direction))
+                .setValue(BOTTOM, connectsTo(bottom, direction));
     }
 
     @Override
@@ -120,36 +127,36 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
         BlockPos top = blockpos.above();
         BlockPos bottom = blockpos.below();
 
-        if (side == Direction.UP)
+        if(side == Direction.UP)
         {
-            if (isConnected(otherState, BOTTOM))
+            if(canConnect(otherState, BOTTOM))
                 return state.setValue(TOP, Boolean.TRUE)
                         .setValue(LEFT, otherState.getValue(LEFT) && connectsTo(accessor.getBlockState(left), direction))
                         .setValue(RIGHT, otherState.getValue(RIGHT) && connectsTo(accessor.getBlockState(right), direction));
             else
                 return state.setValue(TOP, Boolean.FALSE);
         }
-        else if (side == Direction.DOWN)
+        else if(side == Direction.DOWN)
         {
-            if (isConnected(otherState, TOP))
+            if(canConnect(otherState, TOP))
                 return state.setValue(BOTTOM, Boolean.TRUE)
                         .setValue(LEFT, otherState.getValue(LEFT) && connectsTo(accessor.getBlockState(left), direction))
                         .setValue(RIGHT, otherState.getValue(RIGHT) && connectsTo(accessor.getBlockState(right), direction));
             else
                 return state.setValue(BOTTOM, Boolean.FALSE);
         }
-        else if (side == direction.getClockWise())
+        else if(side == direction.getClockWise())
         {
-            if (isConnected(otherState, RIGHT))
+            if(canConnect(otherState, RIGHT))
                 return state.setValue(LEFT, Boolean.TRUE)
                         .setValue(TOP, otherState.getValue(TOP) && connectsTo(accessor.getBlockState(top), direction))
                         .setValue(BOTTOM, otherState.getValue(BOTTOM) && connectsTo(accessor.getBlockState(bottom), direction));
             else
                 return state.setValue(LEFT, Boolean.FALSE);
         }
-        else if (side == direction.getCounterClockWise())
+        else if(side == direction.getCounterClockWise())
         {
-            if (isConnected(otherState, LEFT))
+            if(canConnect(otherState, LEFT))
                 return state.setValue(RIGHT, Boolean.TRUE)
                         .setValue(TOP, otherState.getValue(TOP) && connectsTo(accessor.getBlockState(top), direction))
                         .setValue(BOTTOM, otherState.getValue(BOTTOM) && connectsTo(accessor.getBlockState(bottom), direction));
@@ -176,7 +183,7 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock implements EntityB
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
     {
-        if (level.isClientSide())
+        if(level.isClientSide())
             ClientHandler.showEditValueContainerScreen(level, pos, Component.translatable("gui.cfm.photo_frame_settings"));
         return InteractionResult.SUCCESS;
     }
