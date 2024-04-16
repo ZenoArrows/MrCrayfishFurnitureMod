@@ -30,6 +30,7 @@ import java.util.Map;
  */
 public class PhotoFrameBlockEntity extends BlockEntity implements IValueContainer
 {
+    private final URI GAME_DIR_URI = Minecraft.getInstance().gameDirectory.toURI();
     private String url = null;
     private boolean stretch = false;
     @OnlyIn(Dist.CLIENT) public ImageCache image = null;
@@ -48,6 +49,9 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
     public ImageCache loadPhoto() throws ImageDownloadException
     {
         URI uri = DownloadUtils.createUri(url);
+        if(uri.getScheme().equals("local"))
+            uri = DownloadUtils.createUri("file://" + GAME_DIR_URI.getPath() + uri.getPath());
+
         if(uri == null)
             throw new ImageDownloadException("message.cfm.photo_frame.invalid");
 
@@ -60,8 +64,8 @@ public class PhotoFrameBlockEntity extends BlockEntity implements IValueContaine
         if(!DownloadUtils.isTrustedDomain(uri))
             throw new ImageDownloadException("message.cfm.photo_frame.untrusted");
 
-        if (image == null || !image.url.equals(url))
-            image = ImageAPI.getCache(url, Minecraft.getInstance());
+        if (image == null || !image.url.equals(uri.toString()))
+            image = ImageAPI.getCache(uri.toString(), Minecraft.getInstance());
 
         if (image.getStatus() == ImageCache.Status.WAITING)
             image.load();
