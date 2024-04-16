@@ -156,6 +156,11 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
         if(compound.contains("Powered", Tag.TAG_BYTE))
         {
             this.powered = compound.getBoolean("Powered");
+            if(!this.powered && player != null)
+            {
+                player.release();
+                player = null;
+            }
         }
         if(compound.contains("Stretch", Tag.TAG_BYTE))
         {
