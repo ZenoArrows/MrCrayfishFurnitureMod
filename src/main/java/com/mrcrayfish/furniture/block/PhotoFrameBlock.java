@@ -77,7 +77,9 @@ public class PhotoFrameBlock extends FurnitureHorizontalBlock
     {
         BlockGetter blockgetter = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
-        Direction direction = context.getHorizontalDirection().getOpposite();
+        Direction direction = context.getClickedFace();
+        if (direction.getAxis().isVertical())
+            direction = context.getHorizontalDirection().getOpposite();
 
         BlockState left = blockgetter.getBlockState(blockpos.relative(direction.getClockWise()));
         BlockState right = blockgetter.getBlockState(blockpos.relative(direction.getCounterClockWise()));
