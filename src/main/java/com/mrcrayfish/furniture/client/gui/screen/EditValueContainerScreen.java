@@ -49,7 +49,8 @@ public class EditValueContainerScreen extends Screen
                 {
                     case TEXT_FIELD:
                         component = new TextFieldComponent(entry, font);
-                        this.setInitialFocus(component.getWidget());
+                        if(this.getCurrentFocusPath() == null)
+                            this.setInitialFocus(component.getWidget());
                         break;
                     case TOGGLE:
                         component = new ToggleComponent(entry, font);
