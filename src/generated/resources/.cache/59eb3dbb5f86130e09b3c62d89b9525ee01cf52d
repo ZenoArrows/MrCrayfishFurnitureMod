@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-21T23:05:17.5333811	Loot Tables
+// 1.20.1	2024-04-01T09:57:25.1273059	Loot Tables
 2b2dd6cd5a59b8c17fd3dc18be5122423d58fe41 data/cfm/loot_tables/blocks/acacia_bedside_cabinet.json
 3b5aaa2c8bb60dda63b727a3c8ef58b38eea64a9 data/cfm/loot_tables/blocks/acacia_blinds.json
 0ddf77e1a7a74aface58c31c66c586885b9103b0 data/cfm/loot_tables/blocks/acacia_cabinet.json
@@ -41,6 +41,7 @@ fc1a9394304bc8416ac3d23e7aecf91b5c8d26ce data/cfm/loot_tables/blocks/birch_mail_
 fe48e54aeb79baa6c3e6e66b7e04b8c9cb702e47 data/cfm/loot_tables/blocks/black_kitchen_counter.json
 eec415a2f3ace11a8a538052b983c50f030fc93f data/cfm/loot_tables/blocks/black_kitchen_drawer.json
 6663c1dc48af462936f02e25cbb6b83310e1c40c data/cfm/loot_tables/blocks/black_kitchen_sink.json
+9d836ed2199c4a3803b9cdb359d44549342929ae data/cfm/loot_tables/blocks/black_photo_frame.json
 0ce1e361dfc9e44b32c24d22288cbc8952295845 data/cfm/loot_tables/blocks/black_picket_fence.json
 30c20a4c9ad95a4b7b157baca7f37f492423e423 data/cfm/loot_tables/blocks/black_picket_gate.json
 ea553e9ac33362859f860fbb179a72541f075365 data/cfm/loot_tables/blocks/black_sofa.json
@@ -49,6 +50,7 @@ f9f4b999be81b20dab6a6720311d3946a8f76156 data/cfm/loot_tables/blocks/blue_grill.
 38d8748a30fdefecee14a1ba6af96ec4ffb5cc7d data/cfm/loot_tables/blocks/blue_kitchen_counter.json
 db54b1207e1dfe568027b4d26105bcf0df6b24f3 data/cfm/loot_tables/blocks/blue_kitchen_drawer.json
 b169b0241af116eb48276b91516df10512e9a456 data/cfm/loot_tables/blocks/blue_kitchen_sink.json
+97f39d0a4b947fe33526883c4daef546223d2543 data/cfm/loot_tables/blocks/blue_photo_frame.json
 a28488f02388009ecfa4200e05ddcd3956321742 data/cfm/loot_tables/blocks/blue_picket_fence.json
 d12eadef150cc24184596c55327ad69ca031d7bd data/cfm/loot_tables/blocks/blue_picket_gate.json
 4c901dc72cee4002dc0fc43ece32fb600eb0df9b data/cfm/loot_tables/blocks/blue_sofa.json
@@ -57,6 +59,7 @@ eb22c2c9ccc0ddcc0580a244100c4f21f6396bb9 data/cfm/loot_tables/blocks/brown_coole
 8a0559d9d3a0282c335bcd81f73037347e39e93a data/cfm/loot_tables/blocks/brown_kitchen_counter.json
 80b153641959f4b1912da6593c549740f050576d data/cfm/loot_tables/blocks/brown_kitchen_drawer.json
 ef6eca3e19f0b1f96f542b019eb986d72371e67a data/cfm/loot_tables/blocks/brown_kitchen_sink.json
+ded0be9c505ba9c691d2345fe7cd22093a415a06 data/cfm/loot_tables/blocks/brown_photo_frame.json
 f8b371d722303820dfcc345c142ba0811589beb5 data/cfm/loot_tables/blocks/brown_picket_fence.json
 99d82a5aade13842b1be9f11e8a1a5150df1f442 data/cfm/loot_tables/blocks/brown_picket_gate.json
 2217a1088c9e2b08dfcb4f0d14a30c0cd2734ee9 data/cfm/loot_tables/blocks/brown_sofa.json
@@ -82,6 +85,7 @@ f2b2eb5cde672a856d185cfcad3eb806f6847ee0 data/cfm/loot_tables/blocks/cyan_grill.
 65b508464ed5b5af2ebe62977afe7cabf4e9f5ae data/cfm/loot_tables/blocks/cyan_kitchen_counter.json
 3632e3f473ce98a0f858b8daa64cff095330c50a data/cfm/loot_tables/blocks/cyan_kitchen_drawer.json
 15d28f5fa746f7c1e3ddc481cba2ea57b92ff482 data/cfm/loot_tables/blocks/cyan_kitchen_sink.json
+3c85035b377b369688c85aa53b9e61885d33194d data/cfm/loot_tables/blocks/cyan_photo_frame.json
 f44bf2ebc9b7a05af75edd30c546a5f83cf17099 data/cfm/loot_tables/blocks/cyan_picket_fence.json
 d888f523493a95d272a3fb2ab9321acb7df2501b data/cfm/loot_tables/blocks/cyan_picket_gate.json
 a359dd3f92f1125558df6856d19bd7552586f860 data/cfm/loot_tables/blocks/cyan_sofa.json
@@ -115,6 +119,7 @@ f222e9acb730a0d0760dbce56ecb2879c76d3d8f data/cfm/loot_tables/blocks/gray_grill.
 13522f88f5a4ffdbf462f594981e799f9ea8657e data/cfm/loot_tables/blocks/gray_kitchen_counter.json
 4deed33f2fe0d1cbf585038e08b5c527f9d3c9b9 data/cfm/loot_tables/blocks/gray_kitchen_drawer.json
 ea2519adc3935ec41badad93a877682f23807801 data/cfm/loot_tables/blocks/gray_kitchen_sink.json
+49c23d7531fa7c7c3cbf6724f89789c7702a91cb data/cfm/loot_tables/blocks/gray_photo_frame.json
 7e3558dd757e9e067d621e692809e6b9743ff18e data/cfm/loot_tables/blocks/gray_picket_fence.json
 1b031ab13a3c1300236fdb1a592ddc05e9e8d9dd data/cfm/loot_tables/blocks/gray_picket_gate.json
 bc6154f286eb20f7f272d5f028b01fadb1b64786 data/cfm/loot_tables/blocks/gray_sofa.json
@@ -123,6 +128,7 @@ bc6154f286eb20f7f272d5f028b01fadb1b64786 data/cfm/loot_tables/blocks/gray_sofa.j
 9ee57c6adfc12e4475d3c8e6d581be2935d8e482 data/cfm/loot_tables/blocks/green_kitchen_counter.json
 81a057f1b5e8ee22e4b343a3f23fd0d8739ff690 data/cfm/loot_tables/blocks/green_kitchen_drawer.json
 4950b2b117a46f5e1cd1a0997abd6aa570c312ca data/cfm/loot_tables/blocks/green_kitchen_sink.json
+6a39f2ae4f55f9b2de20f89526f4196d9d3d0567 data/cfm/loot_tables/blocks/green_photo_frame.json
 a66171ee8327180c3ce8cb29b479bc948260d43f data/cfm/loot_tables/blocks/green_picket_fence.json
 ba42e56d6a7a22772074d98d4db2e5ab6b36ef47 data/cfm/loot_tables/blocks/green_picket_gate.json
 1187cc373d0662f038b36716a72e8c203e9ec75e data/cfm/loot_tables/blocks/green_sofa.json
@@ -149,6 +155,7 @@ e7e94e42c7be0aef2e80a1569788612569d87c7e data/cfm/loot_tables/blocks/light_blue_
 be5c52dac93e12008e0f96439c3bf802e0ed9077 data/cfm/loot_tables/blocks/light_blue_kitchen_counter.json
 0f51dd570be273896e01c7b3e36a3b33348e04a1 data/cfm/loot_tables/blocks/light_blue_kitchen_drawer.json
 b4c0ef66e8b43adf57943492bd728750b2382a46 data/cfm/loot_tables/blocks/light_blue_kitchen_sink.json
+4cf7a882a82e5d5582009d369025b0bde21760ff data/cfm/loot_tables/blocks/light_blue_photo_frame.json
 6251d499d85ee96bd4e7ab1fd16f012afaaa196d data/cfm/loot_tables/blocks/light_blue_picket_fence.json
 cdbd55c626d77f5dd499510f374cbb0ff89f700d data/cfm/loot_tables/blocks/light_blue_picket_gate.json
 422a3fbe1b3092273aab7595238d9d34624fe099 data/cfm/loot_tables/blocks/light_blue_sofa.json
@@ -157,6 +164,7 @@ e0a445517fe01c8f7f5b501300721ec5991427c3 data/cfm/loot_tables/blocks/light_gray_
 a46ead6d9aece5b213a4fdfac1bcd676c177fbc8 data/cfm/loot_tables/blocks/light_gray_kitchen_counter.json
 aaaf3f14eccf6bd572526a752b19b028f073b441 data/cfm/loot_tables/blocks/light_gray_kitchen_drawer.json
 61c189148a857829e336d1ea3e710a40b1956500 data/cfm/loot_tables/blocks/light_gray_kitchen_sink.json
+6165c9d4758ff073e3de5d4b4b5d16aa426f39c8 data/cfm/loot_tables/blocks/light_gray_photo_frame.json
 0312a4728321ac544ead307487f6946bcef569cc data/cfm/loot_tables/blocks/light_gray_picket_fence.json
 83561c86f6884859b76410505706384330c9b5a4 data/cfm/loot_tables/blocks/light_gray_picket_gate.json
 84c360638b5e599f028203969e4f15de49c0f9fd data/cfm/loot_tables/blocks/light_gray_sofa.json
@@ -165,6 +173,7 @@ f5ac6c0d309df8e9f8a360914846e2fccf57f821 data/cfm/loot_tables/blocks/lime_cooler
 7410feb5290b1e1299095ec1cedd64c362baa49f data/cfm/loot_tables/blocks/lime_kitchen_counter.json
 bb96e4aa12ca067fe068a8f1766133d8fcd3a75e data/cfm/loot_tables/blocks/lime_kitchen_drawer.json
 0a357cf3787bf0ca5cab3bd9ce41368a3e87b639 data/cfm/loot_tables/blocks/lime_kitchen_sink.json
+547fd8aaae3d1e4f0844fec344462ed27af2986d data/cfm/loot_tables/blocks/lime_photo_frame.json
 e417d02a1b5d6c9bc5011a15ecda237e053812e9 data/cfm/loot_tables/blocks/lime_picket_fence.json
 ff1be03840c11c72f7985c89ada416e2ea095438 data/cfm/loot_tables/blocks/lime_picket_gate.json
 6ff43d169039586cc4787e43ea34d176753e8739 data/cfm/loot_tables/blocks/lime_sofa.json
@@ -173,6 +182,7 @@ b0b53b8ce1da4495aa8731b02c8c6c3da178a19b data/cfm/loot_tables/blocks/magenta_gri
 76283f1c5e203faf15ea275b496a3c42e0b6de2e data/cfm/loot_tables/blocks/magenta_kitchen_counter.json
 c10b45b35cebc5c0eeb2664dd3d48adac7f423c5 data/cfm/loot_tables/blocks/magenta_kitchen_drawer.json
 844ba11dd7c0b2afd4d47e9d874c49312f5138a1 data/cfm/loot_tables/blocks/magenta_kitchen_sink.json
+c4d59abfb68c36c1f90addca22489ae2ec8bf9b4 data/cfm/loot_tables/blocks/magenta_photo_frame.json
 02cbc6994f8400742a3bb06a1c2fe54801aa1eed data/cfm/loot_tables/blocks/magenta_picket_fence.json
 354f14df5615f550ad8ce2378960313d1819ac06 data/cfm/loot_tables/blocks/magenta_picket_gate.json
 e0e56813e745ce4a15c79a95f57da445962e22d3 data/cfm/loot_tables/blocks/magenta_sofa.json
@@ -217,6 +227,7 @@ b4d383ee4a956b84833ad6fb785cc9e254ddf050 data/cfm/loot_tables/blocks/oak_kitchen
 adcb7af76960e46517a5dff9b8638970ecd8b32d data/cfm/loot_tables/blocks/orange_kitchen_counter.json
 95888e2d96f00f30abee08b61cdb9af6e91fbab4 data/cfm/loot_tables/blocks/orange_kitchen_drawer.json
 f30a5678f890c9540bac868275c86010e93897e9 data/cfm/loot_tables/blocks/orange_kitchen_sink.json
+d0d3591554849460a26f3149b0e47e65f468cd38 data/cfm/loot_tables/blocks/orange_photo_frame.json
 906ae5c896da42cd84887e14899bed358aaed5a7 data/cfm/loot_tables/blocks/orange_picket_fence.json
 218dac6c9afb4502a0b85a722b0426f710bfb280 data/cfm/loot_tables/blocks/orange_picket_gate.json
 c4cd9b44d23060e7aeef00ff7170da74cf74578b data/cfm/loot_tables/blocks/orange_sofa.json
@@ -225,6 +236,7 @@ f9108c480fcfc50cc664f5f930ba76ec67439a48 data/cfm/loot_tables/blocks/pink_grill.
 8297df2085f1024c7db54f4ca0d5b27426d87e3b data/cfm/loot_tables/blocks/pink_kitchen_counter.json
 fc436bb5543b47dd76396eaad2321c173e0f751b data/cfm/loot_tables/blocks/pink_kitchen_drawer.json
 d791cc81eaa0e6cc2bcc8783154ee38877a994c6 data/cfm/loot_tables/blocks/pink_kitchen_sink.json
+bf38422a9c1f4e3fef1a61db890311ada6e8d3af data/cfm/loot_tables/blocks/pink_photo_frame.json
 309b9157f7b4ffec345201c5464b1cab49e36c46 data/cfm/loot_tables/blocks/pink_picket_fence.json
 30a03e3918cc46453e3d53629ccdf298caf2e9a4 data/cfm/loot_tables/blocks/pink_picket_gate.json
 d86aa02b1958408a881c28b8d2177c6dc4a95ff9 data/cfm/loot_tables/blocks/pink_sofa.json
@@ -234,6 +246,7 @@ ec543a3bd824edb3fe9111f750c0dc5b4afbc90f data/cfm/loot_tables/blocks/post_box.js
 c0b342d84b1b2f3877aea1faf765c34b974fc3b7 data/cfm/loot_tables/blocks/purple_kitchen_counter.json
 c83b496acbd43c2d6002c8f5d222c74ec7703e51 data/cfm/loot_tables/blocks/purple_kitchen_drawer.json
 e1bf1d0a9b7b30f9d00637da7eefefef2a78d9ce data/cfm/loot_tables/blocks/purple_kitchen_sink.json
+ae8734a08b2e6422a8b6d29b16ac2dcb608f376a data/cfm/loot_tables/blocks/purple_photo_frame.json
 855857024ae55aac01d1e1c0dac0b8f2b1e477cb data/cfm/loot_tables/blocks/purple_picket_fence.json
 3c00a9094844c0538bac1a25aa6cb781b98f8aa9 data/cfm/loot_tables/blocks/purple_picket_gate.json
 05d4abaff82b909c6f86503a9bd6712b26e236ca data/cfm/loot_tables/blocks/purple_sofa.json
@@ -243,6 +256,7 @@ b4a2ed707b8aae0ab3f8d493620db8923c64bb73 data/cfm/loot_tables/blocks/red_grill.j
 d19a3e15c06d9348ec3fca348f1fa01f39dc150f data/cfm/loot_tables/blocks/red_kitchen_counter.json
 b2d924458f61baafb4e810675399024ddbfe40db data/cfm/loot_tables/blocks/red_kitchen_drawer.json
 9d6cb1a0e0ff277fdf1b58e01f0c5b037920f56d data/cfm/loot_tables/blocks/red_kitchen_sink.json
+df30b70764fbf18efbce4355e365b8e08089a192 data/cfm/loot_tables/blocks/red_photo_frame.json
 31d2039fe34a62e5f55eb4af5730f18658a23e7e data/cfm/loot_tables/blocks/red_picket_fence.json
 589a20b1987e892e18b845592888f2f41143398a data/cfm/loot_tables/blocks/red_picket_gate.json
 1bc5a39351550e5b7392bda3c9c2cbacb2efae89 data/cfm/loot_tables/blocks/red_sofa.json
@@ -441,6 +455,7 @@ c05da96c81be4f523ac705ed441b8963d58432b4 data/cfm/loot_tables/blocks/warped_kitc
 27875df65e8c1ad94fac03e50ee99b15870e3843 data/cfm/loot_tables/blocks/white_kitchen_counter.json
 9a1691e2b878f8d20b24b571f1221699f15673c2 data/cfm/loot_tables/blocks/white_kitchen_drawer.json
 43fcbf70c8fc539766c7f4fe6cdf9692f58995d2 data/cfm/loot_tables/blocks/white_kitchen_sink.json
+95c35cef6b10a75a4b9bf0d1c82b8ed2875c618a data/cfm/loot_tables/blocks/white_photo_frame.json
 18e744fa29c8a2010ec45d9648fedff56911b240 data/cfm/loot_tables/blocks/white_picket_fence.json
 dbe3bedc1ec1f135ede313ac667e6dbd309e49ba data/cfm/loot_tables/blocks/white_picket_gate.json
 803ba16b46f205c86885699d30c83de583215661 data/cfm/loot_tables/blocks/white_sofa.json
@@ -449,6 +464,7 @@ a18916becd7f57f4c340114d72ac4ef65f513709 data/cfm/loot_tables/blocks/yellow_gril
 c38a5c81dcc83359b7d61508958895882a4405a5 data/cfm/loot_tables/blocks/yellow_kitchen_counter.json
 43208735d6c5583ff08dca1bddd5fcfb029dfaa3 data/cfm/loot_tables/blocks/yellow_kitchen_drawer.json
 5ddcf130cee6fbc04403952755800a84f1c57d80 data/cfm/loot_tables/blocks/yellow_kitchen_sink.json
+c88f537728efa82081c856e16be6fe04f26e8735 data/cfm/loot_tables/blocks/yellow_photo_frame.json
 66c3f6dda0a6bd17ee7ba9d790ace1996c7333cd data/cfm/loot_tables/blocks/yellow_picket_fence.json
 3480b4b5480c17b1a818c4b71268b50fee84850e data/cfm/loot_tables/blocks/yellow_picket_gate.json
 78b7e28316c97830d546a5554228aefa22ba0504 data/cfm/loot_tables/blocks/yellow_sofa.json

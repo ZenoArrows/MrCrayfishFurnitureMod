@@ -307,6 +307,22 @@
     "cfm:stripped_jungle_kitchen_sink_dark",
     "cfm:stripped_acacia_kitchen_sink_dark",
     "cfm:stripped_dark_oak_kitchen_sink_dark",
-    "cfm:stripped_mangrove_kitchen_sink_dark"
+    "cfm:stripped_mangrove_kitchen_sink_dark",
+    "cfm:white_photo_frame",
+    "cfm:orange_photo_frame",
+    "cfm:magenta_photo_frame",
+    "cfm:light_blue_photo_frame",
+    "cfm:yellow_photo_frame",
+    "cfm:lime_photo_frame",
+    "cfm:pink_photo_frame",
+    "cfm:gray_photo_frame",
+    "cfm:light_gray_photo_frame",
+    "cfm:cyan_photo_frame",
+    "cfm:purple_photo_frame",
+    "cfm:blue_photo_frame",
+    "cfm:brown_photo_frame",
+    "cfm:green_photo_frame",
+    "cfm:red_photo_frame",
+    "cfm:black_photo_frame"
   ]
 }

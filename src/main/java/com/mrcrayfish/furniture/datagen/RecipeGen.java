@@ -321,6 +321,24 @@ public class RecipeGen extends RecipeProvider
                 .unlockedBy("has_chest", has(Tags.Items.CHESTS_WOODEN))
                 .save(consumer);
 
+        // Photo Frame
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_WHITE.get(), Blocks.WHITE_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_ORANGE.get(), Blocks.ORANGE_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_MAGENTA.get(), Blocks.MAGENTA_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_LIGHT_BLUE.get(), Blocks.LIGHT_BLUE_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_YELLOW.get(), Blocks.YELLOW_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_LIME.get(), Blocks.LIME_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_PINK.get(), Blocks.PINK_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_GRAY.get(), Blocks.GRAY_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_LIGHT_GRAY.get(), Blocks.LIGHT_GRAY_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_CYAN.get(), Blocks.CYAN_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_PURPLE.get(), Blocks.PURPLE_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_BLUE.get(), Blocks.BLUE_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_BROWN.get(), Blocks.BROWN_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_GREEN.get(), Blocks.GREEN_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_RED.get(), Blocks.RED_CONCRETE);
+        photoFrame(consumer, ModBlocks.PHOTO_FRAME_BLACK.get(), Blocks.BLACK_CONCRETE);
+
         // Spatula
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SPATULA.get())
                 .pattern("B")
@@ -734,6 +752,20 @@ public class RecipeGen extends RecipeProvider
                 .unlockedBy("has_top", has(top))
                 .unlockedBy("has_concrete", has(Blocks.WHITE_CONCRETE))
                 .unlockedBy("has_bucket", has(Items.BUCKET))
+                .save(recipeConsumer);
+    }
+
+    private static void photoFrame(Consumer<FinishedRecipe> recipeConsumer, ItemLike counter, ItemLike concrete)
+    {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, counter, 8)
+                .pattern("CCC")
+                .pattern("CFC")
+                .pattern("CCC")
+                .define('C', concrete)
+                .define('F', Items.ITEM_FRAME)
+                .group("photo_frame")
+                .unlockedBy("has_concrete", has(Blocks.WHITE_CONCRETE))
+                .unlockedBy("has_item_frame", has(Items.ITEM_FRAME))
                 .save(recipeConsumer);
     }
 

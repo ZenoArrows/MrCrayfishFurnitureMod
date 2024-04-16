@@ -481,6 +481,22 @@ public class ModBlocks
     public static final RegistryObject<Block> FRIDGE_LIGHT = register("fridge_light", () -> new FridgeBlock(Block.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(), () -> ModBlocks.FREEZER_LIGHT), block -> new BlockSupplierItem(new Item.Properties(), block.get(), ModBlocks.FREEZER_LIGHT));
     public static final RegistryObject<Block> FREEZER_DARK = registerNoItem("freezer_dark", () -> new FreezerBlock(Block.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(), () -> ModBlocks.FRIDGE_DARK));
     public static final RegistryObject<Block> FRIDGE_DARK = register("fridge_dark", () -> new FridgeBlock(Block.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(), () -> ModBlocks.FREEZER_DARK), block -> new BlockSupplierItem(new Item.Properties(), block.get(), ModBlocks.FREEZER_DARK));
+    public static final RegistryObject<Block> PHOTO_FRAME_WHITE = register("white_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_ORANGE = register("orange_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_MAGENTA = register("magenta_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_LIGHT_BLUE = register("light_blue_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_YELLOW = register("yellow_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_LIME = register("lime_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_PINK = register("pink_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_GRAY = register("gray_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_LIGHT_GRAY = register("light_gray_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_CYAN = register("cyan_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_PURPLE = register("purple_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_BLUE = register("blue_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_BROWN = register("brown_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_GREEN = register("green_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_RED = register("red_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PHOTO_FRAME_BLACK = register("black_photo_frame", () -> new PhotoFrameBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
 
     private static RegistryObject<Block> register(String name, Supplier<Block> block)
     {

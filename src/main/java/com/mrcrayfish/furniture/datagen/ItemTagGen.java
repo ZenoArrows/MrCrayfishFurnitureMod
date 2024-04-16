@@ -44,7 +44,24 @@ public class ItemTagGen extends ItemTagsProvider
                 .add(ModBlocks.SOFA_BROWN.get().asItem())
                 .add(ModBlocks.SOFA_GREEN.get().asItem())
                 .add(ModBlocks.SOFA_RED.get().asItem())
-                .add(ModBlocks.SOFA_BLACK.get().asItem());
+                .add(ModBlocks.SOFA_BLACK.get().asItem())
+                // Photo Frames
+                .add(ModBlocks.PHOTO_FRAME_WHITE.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_ORANGE.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_MAGENTA.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_LIGHT_BLUE.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_YELLOW.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_LIME.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_PINK.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_GRAY.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_LIGHT_GRAY.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_CYAN.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_PURPLE.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_BLUE.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_BROWN.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_GREEN.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_RED.get().asItem())
+                .add(ModBlocks.PHOTO_FRAME_BLACK.get().asItem());
 
         this.tag(ModTags.Items.KITCHEN)
                 // Kitchen Counters

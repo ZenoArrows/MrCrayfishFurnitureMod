@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "photo_frame",
+  "key": {
+    "C": {
+      "item": "minecraft:magenta_concrete"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CFC",
+    "CCC"
+  ],
+  "result": {
+    "count": 8,
+    "item": "cfm:magenta_photo_frame"
+  },
+  "show_notification": true
+}

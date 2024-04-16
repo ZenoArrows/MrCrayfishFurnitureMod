@@ -201,6 +201,22 @@ public class LootTableGen extends LootTableProvider
             this.dropSelf(ModBlocks.FRIDGE_DARK.get());
             this.dropOther(ModBlocks.FREEZER_LIGHT.get(), ModBlocks.FRIDGE_LIGHT.get());
             this.dropOther(ModBlocks.FREEZER_DARK.get(), ModBlocks.FRIDGE_DARK.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_WHITE.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_ORANGE.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_MAGENTA.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_LIGHT_BLUE.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_YELLOW.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_LIME.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_PINK.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_GRAY.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_LIGHT_GRAY.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_CYAN.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_PURPLE.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_BLUE.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_BROWN.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_GREEN.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_RED.get());
+            this.dropSelf(ModBlocks.PHOTO_FRAME_BLACK.get());
 
             // Dynamically registers drops for wooden furniture
             for(GeneratorData.FurnitureType type : GeneratorData.ALL_TYPES)
