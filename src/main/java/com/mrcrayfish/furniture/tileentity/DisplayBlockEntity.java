@@ -52,7 +52,7 @@ public class DisplayBlockEntity extends BlockEntity implements IValueContainer
 
     public boolean isPowered()
     {
-        return powered;
+        return powered && !getBlockState().getValue(AbstractDisplayBlock.WATERLOGGED);
     }
 
     public boolean nextChannel()

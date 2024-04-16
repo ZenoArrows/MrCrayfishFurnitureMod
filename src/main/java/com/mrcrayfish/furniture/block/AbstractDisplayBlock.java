@@ -10,18 +10,28 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractDisplayBlock extends FurnitureHorizontalBlock implements EntityBlock
+public abstract class AbstractDisplayBlock extends FurnitureHorizontalBlock implements EntityBlock, SimpleWaterloggedBlock
 {
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     protected float width;
     protected float height;
     protected double screenYOffset;
@@ -32,7 +42,7 @@ public abstract class AbstractDisplayBlock extends FurnitureHorizontalBlock impl
     public AbstractDisplayBlock(Properties properties, float width, float height, double screenYOffset, double screenZOffset)
     {
         super(properties.dynamicShape());
-        this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH).setValue(WATERLOGGED, false));
         this.width = width;
         this.height = height;
         this.screenYOffset = screenYOffset;
@@ -57,9 +67,31 @@ public abstract class AbstractDisplayBlock extends FurnitureHorizontalBlock impl
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
     {
+        if(state.getValue(WATERLOGGED))
+            return InteractionResult.PASS;
         if(level.isClientSide())
             ClientHandler.showEditValueContainerScreen(level, pos, Component.translatable("gui.cfm.video_display_settings"));
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context)
+    {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+    {
+        super.createBlockStateDefinition(builder);
+        builder.add(WATERLOGGED);
     }
 
     public float getScreenWidth(BlockState state)
